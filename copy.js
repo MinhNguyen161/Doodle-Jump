@@ -15,7 +15,7 @@ let heroX = canvas.width / 2;
 let heroY = canvas.height / 2;
 let heroSize = 60
 let yDistanceTravelled = 0;
-
+let dead = false;
 let score = 0;
 
 
@@ -40,7 +40,7 @@ function loadImages() {
     heroReady = true;
   };
   heroImage.src = "https://raw.githubusercontent.com/JasonMize/coding-league-assets/master/doodle-jump-doodler.png";
-
+//Creating a bunch of platfroms
   for (let i = 0; i < 200; i++) {
     var pf = new Platform(Math.floor(Math.random() * 500), platformY);
     platforms.push(pf);
@@ -56,7 +56,8 @@ var platforms =[]
 var platformY = 800;
 
 function reset(){
-
+    console.log("de")
+    dead= false
 }
 
 
@@ -155,7 +156,19 @@ function setupKeyboardListeners() {
 let update = function () {
   // Update the time.
   elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-  
+  checkDead()
+  if (!dead){
+      
+  }
+  else{
+    ctx.font = "60px Arial";
+    ctx.fillStyle = "red";
+    ctx.textAlign = "center";
+    ctx.fillText("You Died!", canvas.width / 2, canvas.height / 2); 
+    ctx.font = "36px Arial";
+    ctx.fillText("Press r to restart", canvas.width / 2, (canvas.height / 2) + 50);
+  }
+
   if (37 in keysDown) { // Player is holding left key
     heroX -= 10;
   }
@@ -172,6 +185,15 @@ let update = function () {
   }
   
 };
+//check for bottom block
+function checkDead(){
+    var i = 0;
+    let bottomBlock = 0;
+    if (platforms[0].y - 90 < heroY){
+        dead = true;
+        console.log("dead")
+    }
+}
 
 
 /**
