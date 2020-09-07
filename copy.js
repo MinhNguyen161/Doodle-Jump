@@ -6,6 +6,7 @@ ctx = canvas.getContext("2d");
 canvas.width = 500;
 canvas.height = 800;
 document.body.appendChild(canvas);
+// canvas.position(100,500)
 
 //creating the doodle
 let gravity = 0.1;
